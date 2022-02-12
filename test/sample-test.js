@@ -1,19 +1,39 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
-describe("Greeter", function () {
-  it("Should return the new greeting once it's changed", async function () {
-    const Greeter = await ethers.getContractFactory("Greeter");
-    const greeter = await Greeter.deploy("Hello, world!");
-    await greeter.deployed();
+describe ("Blog", async() => {
+  it("Should create a post", async() => {
+    const Blog = await ethers.getContractFactory("Blog");
+    const blog = await Blog.deploy("My blog");
+    await blog.deployed();
+    await blog.createPost("My first post", "12345");
 
-    expect(await greeter.greet()).to.equal("Hello, world!");
+    const posts = await blog.fetchPosts();
+    expect(posts[0].title).to.equal("My first post");
 
-    const setGreetingTx = await greeter.setGreeting("Hola, mundo!");
-
-    // wait until the transaction is mined
-    await setGreetingTx.wait();
-
-    expect(await greeter.greet()).to.equal("Hola, mundo!");
   });
-});
+
+  it("Should edit a post", async() => {
+    const Blog = await ethers.getContractFactory("Blog");
+    const blog = await Blog.deploy("My blog");
+    await blog.deployed();
+    await blog.createPost("My Second Post", "12345");
+
+    await blog.updatePost(1, "My updated post", "23456", true);
+
+    posts = await blog.fetchPosts();
+    expect(posts[0].title).to.equal("My updated post");
+  })
+
+  it("Should update the name", async() => {
+    const Blog = await ethers.getContractFactory("Blog");
+    const blog = await Blog.deploy("My blog");
+    await blog.deployed();
+
+    expect(await blog.name()).equal("My blog");
+    await blog.updateName("My new blog");
+    expect(await blog.name()).to.equal("My new blog")
+  })
+
+
+})
