@@ -1,15 +1,11 @@
-# Basic Sample Hardhat Project
+# Web3 Blog!
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts.
+Tech stack:
+* Polygon
+* Hardhat
+* NextJS
+* EthersJS
+* IPFS
+* The Graph Protocol
 
-Try running some of the following tasks:
-
-```shell
-npx hardhat accounts
-npx hardhat compile
-npx hardhat clean
-npx hardhat test
-npx hardhat node
-node scripts/sample-script.js
-npx hardhat help
-```
+Following along with: https://dev.to/dabit3/the-complete-guide-to-full-stack-web3-development-4g74
